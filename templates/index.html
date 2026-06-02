@@ -18,12 +18,20 @@
         }
         h1 {
             color: white;
-            font-size: 2.5em;
+            font-size: 2.2em;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             padding: 0 20px;
-            z-index: 10;
+        }
+        /* Міне осы div - қорап */
+        .btn-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100px;
         }
         button {
             padding: 15px 40px;
@@ -32,51 +40,43 @@
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            position: absolute;
-            transition: transform 0.1s;
+            transition: transform 0.15s;
         }
         #iya {
             background: #4CAF50;
             color: white;
-            z-index: 5;
         }
         #zhok {
             background: #f44336;
             color: white;
-            z-index: 6;
         }
     </style>
 </head>
 <body>
     <h1>Кәусар бүгін менімен пикникке барасың ба? 😊</h1>
 
-    <button id="iya" onclick="window.location.href='/rakmet'">Ия</button>
-    <button id="zhok">Жоқ</button>
+    <!-- Міне осы div-тің ішіне 2 батырма салдық -->
+    <div class="btn-container">
+        <button id="iya" onclick="window.location.href='/rakmet'">Ия</button>
+        <button id="zhok">Жоқ</button>
+    </div>
 
     <script>
         const zhokBtn = document.getElementById('zhok');
         const iyaBtn = document.getElementById('iya');
         let scale = 1;
 
-        // Бастапқы позиция
-        iyaBtn.style.left = '45%';
-        iyaBtn.style.top = '55%';
-        zhokBtn.style.left = '55%';
-        zhokBtn.style.top = '55%';
-
         zhokBtn.addEventListener('mouseover', function() {
-            // "Ия" батырмасының өлшемін ал
             const iyaRect = iyaBtn.getBoundingClientRect();
-            const iyaWidth = iyaRect.width;
-            const iyaHeight = iyaRect.height;
+            const iyaArea = (iyaRect.width * iyaRect.height) / (window.innerWidth * window.innerHeight);
 
-            // Егер "Ия" экранның 80%-нан үлкен болса, қашуды тоқтат
-            if(iyaWidth > window.innerWidth * 0.8 || iyaHeight > window.innerHeight * 0.8) {
+            if(iyaArea > 0.9) {
                 zhokBtn.style.display = 'none';
                 return;
             }
 
-            // "Жоқ" қашады
+            // Қашқанда absolute болады
+            zhokBtn.style.position = 'absolute';
             const maxX = window.innerWidth - 150;
             const maxY = window.innerHeight - 100;
             const x = Math.random() * maxX;
@@ -84,13 +84,8 @@
             zhokBtn.style.left = x + 'px';
             zhokBtn.style.top = y + 'px';
 
-            // "Ия" үлкейеді, бірақ текст өзгермейді
-            scale += 0.25;
+            scale += 0.2;
             iyaBtn.style.transform = `scale(${scale})`;
-        });
-
-        zhokBtn.addEventListener('click', function() {
-            alert('Қашып құтылмайсың 😏 Ия батырмасы барған сайын үлкейіп барады!');
         });
     </script>
 </body>

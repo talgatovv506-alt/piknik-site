@@ -11,82 +11,28 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             font-family: Arial;
             overflow: hidden;
+            padding-top: 50px;
         }
         h1 {
             color: white;
-            font-size: 2.2em;
+            font-size: 2em;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             padding: 0 20px;
+            z-index: 10;
+            position: relative;
         }
-        /* Міне осы div - қорап */
         .btn-container {
             display: flex;
             gap: 40px;
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 100px;
-        }
-        button {
-            padding: 15px 40px;
-            font-size: 1.5em;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.15s;
-        }
-        #iya {
-            background: #4CAF50;
-            color: white;
-        }
-        #zhok {
-            background: #f44336;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <h1>Кәусар бүгін менімен пикникке барасың ба? 😊</h1>
+            position: relative;
+            z-index:
 
-    <!-- Міне осы div-тің ішіне 2 батырма салдық -->
-    <div class="btn-container">
-        <button id="iya" onclick="window.location.href='/rakmet'">Ия</button>
-        <button id="zhok">Жоқ</button>
-    </div>
-
-    <script>
-        const zhokBtn = document.getElementById('zhok');
-        const iyaBtn = document.getElementById('iya');
-        let scale = 1;
-
-        zhokBtn.addEventListener('mouseover', function() {
-            const iyaRect = iyaBtn.getBoundingClientRect();
-            const iyaArea = (iyaRect.width * iyaRect.height) / (window.innerWidth * window.innerHeight);
-
-            if(iyaArea > 0.9) {
-                zhokBtn.style.display = 'none';
-                return;
-            }
-
-            // Қашқанда absolute болады
-            zhokBtn.style.position = 'absolute';
-            const maxX = window.innerWidth - 150;
-            const maxY = window.innerHeight - 100;
-            const x = Math.random() * maxX;
-            const y = Math.random() * maxY;
-            zhokBtn.style.left = x + 'px';
-            zhokBtn.style.top = y + 'px';
-
-            scale += 0.2;
-            iyaBtn.style.transform = `scale(${scale})`;
-        });
-    </script>
-</body>
-</html>
